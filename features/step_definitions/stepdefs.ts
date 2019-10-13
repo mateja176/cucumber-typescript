@@ -1,6 +1,6 @@
-const assert = require('assert');
-const { Given, When, Then } = require('cucumber');
-const isItFriday = require('../../src/isItFriday');
+import * as assert from 'assert';
+import { Given, Then, When } from 'cucumber';
+import isItFriday from '../../src/isItFriday';
 
 Given('today is {string}', function (givenDay) {
   this.today = givenDay;

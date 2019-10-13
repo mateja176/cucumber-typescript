@@ -1,4 +1,4 @@
-module.exports = function isItFriday(today) {
+export default (today: string) => {
   if (today === 'Friday') {
     return 'TGIF';
   }
