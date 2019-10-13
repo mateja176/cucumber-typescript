@@ -1,15 +1,26 @@
 import * as assert from 'assert';
-import { Given, Then, When } from 'cucumber';
+import { Given, Then, When, World } from 'cucumber';
 import isItFriday from '../../src/isItFriday';
 
-Given('today is {string}', function (givenDay) {
+interface IsItFridayWorld extends World {
+  today: string;
+  actualAnswer?: string;
+}
+
+type IsItFridayGiven = (this: IsItFridayWorld, givenDay: string) => void;
+
+Given('today is {string}', function(givenDay) {
   this.today = givenDay;
-});
+} as IsItFridayGiven);
 
-When("I ask whether it's Friday yet", function () {
+type IsItFridayWhen = (this: IsItFridayWorld) => void;
+
+When("I ask whether it's Friday yet", function() {
   this.actualAnswer = isItFriday(this.today);
-});
+} as IsItFridayWhen);
 
-Then('I should be told {string}', function (expectedAnswer) {
+type IsItFridayThen = (this: IsItFridayWorld, expectedAnswer: string) => void;
+
+Then('I should be told {string}', function(expectedAnswer) {
   assert.equal(this.actualAnswer, expectedAnswer);
-});
+} as IsItFridayThen);
